@@ -3,423 +3,154 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Zohair Tracker</title>
+<title>Zohair Tracker V2</title>
 <style>
 *{box-sizing:border-box}
-:root{
-  --bg:#07111f;--card:#101c2f;--card2:#16263d;--muted:#94a3b8;
-  --text:#f8fafc;--green:#22c55e;--blue:#38bdf8;--purple:#a78bfa;
-  --yellow:#facc15;--red:#fb7185;--border:rgba(255,255,255,.08)
-}
-body{
-  margin:0;background:radial-gradient(circle at top,#132949 0,#07111f 45%);
-  color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  padding:18px 14px 92px;
-}
-h1,h2,h3,p{margin:0}
-.app{max-width:520px;margin:auto}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.date{color:var(--muted);font-size:13px}
-.title{font-size:28px;font-weight:800}
-.pill{background:rgba(34,197,94,.14);color:var(--green);padding:8px 12px;border-radius:99px;font-weight:700}
-.card{
-  background:linear-gradient(180deg,var(--card),#0d1728);
-  border:1px solid var(--border);border-radius:24px;padding:16px;margin-bottom:14px;
-  box-shadow:0 12px 30px rgba(0,0,0,.22)
-}
-.hero{background:linear-gradient(135deg,#17345a,#111827 55%,#193326)}
-.row{display:flex;gap:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{font-size:30px;font-weight:900;color:var(--green)}
-.label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.progress{height:10px;background:#263449;border-radius:99px;overflow:hidden;margin-top:10px}
-.fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:99px}
-input,select,textarea{
-  width:100%;background:#0b1424;border:1px solid var(--border);color:white;
-  border-radius:14px;padding:13px;margin-top:10px;font-size:15px;outline:none
-}
-textarea{min-height:76px;resize:none}
-button{
-  border:0;border-radius:14px;padding:12px 14px;font-weight:800;color:white;
-  background:linear-gradient(135deg,var(--green),#16a34a);margin-top:10px;width:100%;
-}
-button.secondary{background:#22324a;color:#dbeafe}
-button.danger{background:#7f1d1d}
-button.smallbtn{width:auto;padding:8px 10px;margin:6px 4px 0 0;font-size:12px}
-.item{background:var(--card2);border:1px solid var(--border);border-radius:18px;padding:13px;margin-top:10px}
-.item.done{opacity:.55}
-.meta{font-size:12px;color:var(--muted);margin-top:5px}
-.tabs{display:none}
-.tabs.active{display:block}
-.nav{
-  position:fixed;bottom:0;left:0;right:0;background:rgba(10,18,32,.96);
-  backdrop-filter:blur(16px);border-top:1px solid var(--border);
-  display:flex;justify-content:space-around;padding:8px 6px 22px;z-index:10
-}
-.nav button{
-  background:none;width:auto;margin:0;color:var(--muted);font-size:11px;padding:6px 8px
-}
-.nav button.active{color:var(--green)}
-.icon{font-size:21px;display:block;margin-bottom:2px}
-.chart{display:flex;align-items:end;gap:7px;height:74px;margin-top:12px}
-.bar{flex:1;background:#263449;border-radius:99px;min-height:10px;position:relative;overflow:hidden}
-.bar span{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,var(--blue),var(--green));border-radius:99px}
-.prayers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.prayer{background:#22324a}
-.prayer.done{background:linear-gradient(135deg,var(--green),#15803d)}
-.bigscore{font-size:46px;font-weight:950}
+:root{--bg:#090f1f;--panel:#151c2e;--panel2:#20283a;--soft:#2c3548;--text:#f8fafc;--muted:#94a3b8;--green:#21d19f;--blue:#45b8f2;--purple:#7657e8;--orange:#f59e0b;--red:#ef4444;--border:rgba(255,255,255,.10)}
+body{margin:0;background:radial-gradient(circle at top,#111d38 0,#090f1f 42%,#050914 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:96px}
+.app{max-width:520px;margin:auto;padding:18px 14px}
+h1,h2,h3,p{margin:0}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}.green{color:var(--green)}.blue{color:var(--blue)}.purple{color:var(--purple)}.orange{color:var(--orange)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}.brand{font-size:13px;color:var(--green);font-weight:800}.title{font-size:31px;font-weight:900;line-height:1.02}.xpPill{background:rgba(255,255,255,.08);border:1px solid var(--border);padding:10px 12px;border-radius:18px;text-align:right}
+.card{background:linear-gradient(180deg,var(--panel),#101729);border:1px solid var(--border);border-radius:24px;padding:16px;margin-bottom:14px;box-shadow:0 14px 28px rgba(0,0,0,.22)}
+.card2{background:var(--panel2);border:1px solid var(--border);border-radius:18px;padding:13px;margin-top:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.stat{font-size:30px;font-weight:950}.label{text-transform:uppercase;letter-spacing:.08em;font-size:11px;color:var(--muted);font-weight:800}
+.progress{height:10px;background:#0b1120;border-radius:99px;overflow:hidden;margin-top:9px}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--blue))}
+input,select,textarea{width:100%;background:#0b1120;border:1px solid var(--border);color:white;border-radius:14px;padding:12px;margin-top:9px;font-size:15px;outline:none}textarea{min-height:70px;resize:none}
+button{border:0;border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,var(--green),#16a34a);color:#03110b;font-weight:900;width:100%;margin-top:9px}button.secondary{background:#2d374c;color:white}button.danger{background:#7f1d1d;color:white}.miniBtn{width:auto;padding:8px 10px;margin:8px 5px 0 0;font-size:12px}
+.screen{display:none}.screen.active{display:block}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(9,15,31,.96);backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:7px 3px 20px;z-index:10}.nav button{background:none;color:var(--muted);width:auto;margin:0;padding:5px;font-size:10px}.nav button.active{color:var(--green)}.icon{font-size:19px;display:block}
+.chart{height:150px;display:flex;align-items:end;gap:7px;margin-top:12px;border-left:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:8px}.bar{flex:1;background:rgba(255,255,255,.04);border-radius:10px 10px 0 0;position:relative}.bar span{position:absolute;bottom:0;left:0;right:0;background:var(--blue);border-radius:10px 10px 0 0}.line svg{width:100%;height:160px;margin-top:8px}.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px}.cell{aspect-ratio:1;background:#064e3b;border-radius:6px}.cell.mid{background:#0f766e}.cell.high{background:#21d19f}.prayers{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.prayer.done{background:#dffcf1;color:#064e3b}.ring{width:118px;height:118px;border-radius:50%;background:conic-gradient(var(--purple) var(--deg),#e5e7eb 0);display:grid;place-items:center}.ringInner{width:82px;height:82px;background:#111827;border-radius:50%;display:grid;place-items:center;text-align:center}
+.achGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ach{background:#111827;border-radius:16px;padding:18px;text-align:center;color:#ddd}.ach.lock{opacity:.35}.row{display:flex;gap:10px}.row>*{flex:1}
 </style>
 </head>
-
 <body>
 <div class="app">
 
-<section id="dashboard" class="tabs active">
-  <div class="top">
-    <div>
-      <div class="date" id="todayDate"></div>
-      <div class="title">Zohair Tracker</div>
-    </div>
-    <div class="pill">Lv <span id="levelTop">1</span></div>
+<section id="dashboard" class="screen active">
+  <div class="top"><div><div class="brand">Zohair Tracker</div><div class="title">Control Dashboard</div><div class="tiny" id="dateText"></div></div><div class="xpPill"><div class="tiny">Level <span id="topLevel"></span></div><b class="green"><span id="topXP"></span> XP</b></div></div>
+  <div class="card"><div class="label">Today’s Score</div><div class="stat"><span id="dailyScore"></span>%</div><div class="progress"><div id="dailyFill" class="fill"></div></div><p class="tiny" id="scoreNote"></p></div>
+  <div class="grid2">
+    <div class="card"><div class="label">Tasks</div><div class="stat" id="dashTasks"></div><p class="green tiny">completion</p></div>
+    <div class="card"><div class="label">Namaz</div><div class="stat" id="dashNamaz"></div><p class="green tiny">daily consistency</p></div>
+    <div class="card"><div class="label">Reading</div><div class="stat blue" id="dashReading"></div><p class="tiny">pages today</p></div>
+    <div class="card"><div class="label">Challenges</div><div class="stat purple" id="dashChallenges"></div><p class="tiny">active</p></div>
   </div>
-
-  <div class="card hero">
-    <div class="label">Today’s Score</div>
-    <div class="bigscore"><span id="dailyScore">0</span>%</div>
-    <div class="progress"><div id="scoreFill" class="fill"></div></div>
-    <div class="meta">XP: <span id="xpTop">0</span> · Momentum: <span id="momentum">Building</span></div>
-  </div>
-
-  <div class="grid">
-    <div class="card"><div class="label">Tasks</div><div class="stat" id="taskPercent">0%</div><div class="meta" id="taskMini">0/0 done</div></div>
-    <div class="card"><div class="label">Namaz</div><div class="stat" id="namazPercent">0%</div><div class="meta" id="namazMini">0/5 done</div></div>
-    <div class="card"><div class="label">Reading</div><div class="stat" id="readingToday">0</div><div class="meta">pages today</div></div>
-    <div class="card"><div class="label">Ideas</div><div class="stat" id="ideasCount">0</div><div class="meta">parked</div></div>
-  </div>
-
-  <div class="card">
-    <h3>Weekly Momentum</h3>
-    <div class="chart" id="chart"></div>
-  </div>
-
-  <div class="card">
-    <h3>Active Objectives</h3>
-    <div id="dashObjectives"></div>
-  </div>
+  <div class="card"><h3>7-Day Task Completion</h3><div class="line" id="taskLine"></div></div>
+  <div class="card"><h3>Weekly XP Momentum</h3><div class="chart" id="xpBars"></div></div>
+  <div class="card"><h3>Prayer Consistency</h3><p class="tiny">Last 28 days</p><div class="heat" id="dashHeat"></div></div>
+  <div class="card"><h3>Reading Progress</h3><p><b id="bookDash"></b> <span class="tiny" id="bookProgressText"></span></p><div class="progress"><div id="bookFill" class="fill"></div></div><div class="chart" id="readingBars"></div></div>
+  <div class="card"><h3>Active Challenges</h3><div id="dashChallengeList"></div></div>
 </section>
 
-<section id="tasks" class="tabs">
+<section id="tasks" class="screen">
   <div class="top"><div class="title">Tasks</div></div>
-  <div class="card">
-    <input id="taskTitle" placeholder="What needs to be done?" />
-    <select id="taskPriority">
-      <option value="10">Low · 10 XP</option>
-      <option value="20">Medium · 20 XP</option>
-      <option value="30">High · 30 XP</option>
-      <option value="50">Critical · 50 XP</option>
-    </select>
-    <select id="taskEnergy">
-      <option>Low Energy</option><option>Medium Energy</option><option>High Energy</option>
-    </select>
-    <button onclick="addTask()">Add Task</button>
-  </div>
+  <div class="card"><input id="taskTitle" placeholder="Task title"><div class="row"><select id="taskPriority"><option value="10">Low</option><option value="20">Medium</option><option value="30">High</option><option value="50">Critical</option></select><select id="taskEnergy"><option>Low energy</option><option>Medium energy</option><option>High energy</option></select></div><button onclick="addTask()">Add Task</button></div>
   <div id="taskList"></div>
 </section>
 
-<section id="planner" class="tabs">
-  <div class="top"><div class="title">Planner</div></div>
-  <div class="card">
-    <input id="blockTitle" placeholder="Time block title" />
-    <div class="row">
-      <input id="blockStart" type="time" />
-      <input id="blockEnd" type="time" />
-    </div>
-    <select id="blockType">
-      <option>Deep Work</option><option>Admin</option><option>Prayer</option><option>Family</option><option>Health</option>
-    </select>
-    <button onclick="addBlock()">Add Block</button>
-  </div>
-  <div id="blockList"></div>
+<section id="namaz" class="screen">
+  <div class="top"><div class="title">Namaz</div></div>
+  <div class="card"><h3>Prayer Tracker</h3><div class="prayers" id="prayerButtons"></div><p class="tiny" id="prayerAvg"></p></div>
+  <div class="card"><h3>28-Day Heatmap</h3><div class="heat" id="namazHeat"></div></div>
 </section>
 
-<section id="objectives" class="tabs">
-  <div class="top"><div class="title">Objectives</div></div>
-  <div class="card">
-    <input id="objectiveTitle" placeholder="Objective title" />
-    <textarea id="objectiveWhy" placeholder="Why does this matter?"></textarea>
-    <input id="objectiveProgress" type="number" min="0" max="100" placeholder="Progress %" />
-    <button onclick="addObjective()">Add Objective</button>
-  </div>
-  <div id="objectiveList"></div>
+<section id="reading" class="screen">
+  <div class="top"><div class="title">Reading</div></div>
+  <div class="card"><input id="bookName" placeholder="Book name"><div class="row"><input id="totalPages" type="number" placeholder="Total pages"><input id="currentPage" type="number" placeholder="Current page"></div><button onclick="saveBook()">Save Book Progress</button><button class="secondary" onclick="addPages()">Add Pages Read Today</button></div>
+  <div class="card"><h3 id="readBookTitle"></h3><div class="stat blue" id="readPercent"></div><div class="progress"><div id="readFill" class="fill"></div></div><p class="tiny" id="readStats"></p></div>
 </section>
 
-<section id="ideas" class="tabs">
-  <div class="top"><div class="title">Ideas</div></div>
-  <div class="card">
-    <input id="ideaTitle" placeholder="Park an idea" />
-    <input id="ideaTags" placeholder="Tags e.g. business, ADHD, LC" />
-    <select id="ideaExcitement">
-      <option value="3">Excitement 3/5</option><option value="4">Excitement 4/5</option><option value="5">Excitement 5/5</option>
-    </select>
-    <button onclick="addIdea()">Park Idea</button>
-  </div>
-  <div id="ideaList"></div>
+<section id="challenges" class="screen">
+  <div class="top"><div class="title">Challenges</div></div>
+  <div class="card"><input id="challengeTitle" placeholder="Challenge title"><input id="challengeCategory" placeholder="Category"><div class="row"><input id="challengeTarget" placeholder="Target date"><input id="challengeProgress" type="number" placeholder="%"></div><button onclick="addChallenge()">Add Challenge</button></div>
+  <div class="card"><h3>Active Challenges</h3><div id="challengeList"></div></div>
+  <div class="card"><h3>Challenge Overview</h3><div id="challengeOverview"></div></div>
 </section>
 
-<section id="scores" class="tabs">
+<section id="analytics" class="screen">
+  <div class="top"><div class="title">Analytics</div></div>
+  <div class="grid3"><div class="card"><div class="stat green">14</div><p class="tiny">Best streak</p></div><div class="card"><div class="stat">74%</div><p class="tiny">Avg completion</p></div><div class="card"><div class="stat purple">87</div><p class="tiny">Best week</p></div></div>
+  <div class="card"><h3>30-Day Task Completion</h3><div class="line" id="analyticsLine"></div></div>
+  <div class="card"><h3>Namaz Trends</h3><div id="namazTrends"></div></div>
+  <div class="card"><h3>Reading Momentum</h3><div class="line" id="readingLine"></div><p class="tiny">Annual pace: <b id="annualPace"></b> pages</p></div>
+</section>
+
+<section id="scores" class="screen">
   <div class="top"><div class="title">Scores</div></div>
-  <div class="card hero">
-    <div class="label">Total XP</div>
-    <div class="bigscore" id="scoreXP">0</div>
-    <div class="meta">Current Level: <span id="scoreLevel">1</span></div>
-  </div>
-  <div class="card">
-    <h3>Achievements</h3>
-    <div id="achievements"></div>
-  </div>
-  <button class="danger" onclick="resetApp()">Reset App Data</button>
+  <div class="card"><h3>Level <span id="scoreLevel"></span> — Consistent</h3><div class="row" style="align-items:center"><div class="ring" id="xpRing"><div class="ringInner"><b id="ringPct"></b><span class="tiny">to next</span></div></div><div><p>Current XP <b id="scoreXP"></b></p><p>Next level <b id="nextLevelXP"></b></p><p>XP needed <b class="purple" id="xpNeeded"></b></p><p>This week <b class="green">+240 XP</b></p></div></div></div>
+  <div class="card"><h3>Score Breakdown This Week</h3><div id="scoreBreakdown"></div></div>
+  <div class="card"><h3>Achievements</h3><div class="achGrid" id="achievements"></div></div>
+</section>
+
+<section id="ideas" class="screen">
+  <div class="top"><div class="title">Ideas</div></div>
+  <div class="card"><input id="ideaTitle" placeholder="Drop idea here"><input id="ideaTags" placeholder="Tags"><select id="ideaExcitement"><option>Excitement 3</option><option>Excitement 4</option><option>Excitement 5</option></select><button onclick="addIdea()">Park</button></div>
+  <div id="ideaList"></div>
 </section>
 
 </div>
 
 <div class="nav">
-  <button class="active" onclick="showTab('dashboard',this)"><span class="icon">🏠</span>Home</button>
-  <button onclick="showTab('tasks',this)"><span class="icon">✅</span>Tasks</button>
-  <button onclick="showTab('planner',this)"><span class="icon">🗓️</span>Plan</button>
-  <button onclick="showTab('objectives',this)"><span class="icon">🎯</span>Goals</button>
-  <button onclick="showTab('ideas',this)"><span class="icon">💡</span>Ideas</button>
-  <button onclick="showTab('scores',this)"><span class="icon">🏆</span>Score</button>
+<button class="active" onclick="tab('dashboard',this)"><span class="icon">▦</span>Dash</button>
+<button onclick="tab('tasks',this)"><span class="icon">☑</span>Tasks</button>
+<button onclick="tab('namaz',this)"><span class="icon">🕌</span>Namaz</button>
+<button onclick="tab('reading',this)"><span class="icon">📖</span>Read</button>
+<button onclick="tab('challenges',this)"><span class="icon">◎</span>Chal</button>
+<button onclick="tab('analytics',this)"><span class="icon">⌁</span>Stats</button>
+<button onclick="tab('scores',this)"><span class="icon">🏆</span>XP</button>
+<button onclick="tab('ideas',this)"><span class="icon">💡</span>Ideas</button>
 </div>
 
 <script>
-const todayKey = new Date().toISOString().slice(0,10);
-
-let state = JSON.parse(localStorage.getItem("ztState")) || {
-  xp:0,
-  tasks:[],
-  blocks:[],
-  objectives:[
-    {title:"Build Zohair Tracker",why:"Create a daily execution system I actually use.",progress:20,lastAwarded:20}
-  ],
-  ideas:[],
-  reading:{pagesToday:0,totalPages:0,lastDate:todayKey},
-  prayers:{date:todayKey,fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false},
-  history:[20,35,50,45,65,70,0]
+const today=new Date().toISOString().slice(0,10);
+let s=JSON.parse(localStorage.getItem("ztV2"))||{
+xp:1280,tasks:[],ideas:[],reading:{book:"Atomic Habits",total:320,current:198,today:0,week:[0,24,40,18,32,0,30]},
+prayers:{date:today,fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false,history:Array.from({length:28},()=>Math.floor(Math.random()*5)+1)},
+challenges:[
+{title:"ADHD Education",cat:"Personal development",target:"Dec 2025",progress:65,color:"green"},
+{title:"Padel Development",cat:"Sports",target:"Mar 2026",progress:40,color:"blue"},
+{title:"Business Growth",cat:"Career",target:"Jun 2026",progress:55,color:"purple"},
+{title:"Career Evaluation",cat:"Career",target:"Sep 2025",progress:90,color:"orange"},
+{title:"Hydroponics Research",cat:"Personal project",target:"Dec 2025",progress:25,color:"red"}
+],
+taskHist:[80,50,65,72,88,70,0],xpHist:[120,90,140,160,220,180,80]
 };
-
-if(state.prayers.date !== todayKey){
-  state.prayers={date:todayKey,fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false};
-  state.reading.pagesToday=0;
-  state.reading.lastDate=todayKey;
-}
-
-function save(){localStorage.setItem("ztState",JSON.stringify(state));render();}
-function level(){return Math.floor(state.xp/500)+1;}
-function pct(a,b){return b?Math.round((a/b)*100):0;}
-
-function showTab(id,btn){
-  document.querySelectorAll(".tabs").forEach(x=>x.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
-  btn.classList.add("active");
-  render();
-}
-
-function addTask(){
-  const title=document.getElementById("taskTitle").value.trim();
-  if(!title)return;
-  state.tasks.unshift({
-    title,
-    xp:Number(document.getElementById("taskPriority").value),
-    energy:document.getElementById("taskEnergy").value,
-    done:false,
-    created:todayKey
-  });
-  document.getElementById("taskTitle").value="";
-  save();
-}
-
-function completeTask(i){
-  if(state.tasks[i].done)return;
-  state.tasks[i].done=true;
-  state.tasks[i].completed=todayKey;
-  state.xp+=state.tasks[i].xp;
-  save();
-}
-
-function deleteTask(i){state.tasks.splice(i,1);save();}
-
-function addBlock(){
-  const title=document.getElementById("blockTitle").value.trim();
-  if(!title)return;
-  state.blocks.push({
-    title,
-    start:document.getElementById("blockStart").value,
-    end:document.getElementById("blockEnd").value,
-    type:document.getElementById("blockType").value,
-    done:false
-  });
-  document.getElementById("blockTitle").value="";
-  save();
-}
-
-function completeBlock(i){
-  if(state.blocks[i].done)return;
-  state.blocks[i].done=true;
-  state.xp+=15;
-  save();
-}
-
-function deleteBlock(i){state.blocks.splice(i,1);save();}
-
-function addObjective(){
-  const title=document.getElementById("objectiveTitle").value.trim();
-  if(!title)return;
-  const progress=Number(document.getElementById("objectiveProgress").value)||0;
-  state.objectives.unshift({
-    title,
-    why:document.getElementById("objectiveWhy").value,
-    progress,
-    lastAwarded:Math.floor(progress/10)*10
-  });
-  document.getElementById("objectiveTitle").value="";
-  document.getElementById("objectiveWhy").value="";
-  document.getElementById("objectiveProgress").value="";
-  save();
-}
-
-function updateObjective(i,val){
-  const newProgress=Number(val)||0;
-  const oldAward=state.objectives[i].lastAwarded||0;
-  const newAward=Math.floor(newProgress/10)*10;
-  if(newAward>oldAward){
-    state.xp+=((newAward-oldAward)/10)*50;
-    state.objectives[i].lastAwarded=newAward;
-  }
-  state.objectives[i].progress=newProgress;
-  save();
-}
-
-function deleteObjective(i){state.objectives.splice(i,1);save();}
-
-function addIdea(){
-  const title=document.getElementById("ideaTitle").value.trim();
-  if(!title)return;
-  state.ideas.unshift({
-    title,
-    tags:document.getElementById("ideaTags").value,
-    excitement:document.getElementById("ideaExcitement").value,
-    archived:false
-  });
-  document.getElementById("ideaTitle").value="";
-  document.getElementById("ideaTags").value="";
-  state.xp+=5;
-  save();
-}
-
-function ideaToTask(i){
-  state.tasks.unshift({title:state.ideas[i].title,xp:20,energy:"Medium Energy",done:false,created:todayKey});
-  state.ideas.splice(i,1);
-  save();
-}
-
-function archiveIdea(i){state.ideas[i].archived=true;save();}
-
-function togglePrayer(name){
-  if(!state.prayers[name])state.xp+=15;
-  state.prayers[name]=!state.prayers[name];
-  save();
-}
-
-function addReading(){
-  const pages=Number(prompt("Pages read today?"))||0;
-  if(!pages)return;
-  state.reading.pagesToday+=pages;
-  state.reading.totalPages+=pages;
-  state.xp+=Math.max(10,Math.floor(pages/5)*10);
-  save();
-}
-
+if(s.prayers.date!==today){s.prayers={date:today,fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false,history:[...s.prayers.history.slice(1),0]};s.reading.today=0}
+function save(){localStorage.setItem("ztV2",JSON.stringify(s));render()}
+function lvl(){return Math.floor(s.xp/500)+1}
+function pct(a,b){return b?Math.round(a/b*100):0}
+function tab(id,b){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
+function line(id,data,color="var(--green)"){let pts=data.map((v,i)=>`${i*(100/(data.length-1))},${150-(v*1.3)}`).join(" ");document.getElementById(id).innerHTML=`<svg viewBox="0 0 100 160" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5"/><polygon points="0,160 ${pts} 100,160" fill="rgba(33,209,159,.13)"/></svg>`}
+function bars(id,data,color="var(--blue)"){document.getElementById(id).innerHTML=data.map(v=>`<div class="bar"><span style="height:${Math.max(v/2.5,8)}%;background:${color}"></span></div>`).join("")}
+function heat(id){document.getElementById(id).innerHTML=s.prayers.history.map(v=>`<div class="cell ${v>=4?'high':v>=2?'mid':''}"></div>`).join("")}
+function addTask(){let t=taskTitle.value.trim();if(!t)return;s.tasks.unshift({title:t,xp:+taskPriority.value,energy:taskEnergy.value,done:false});taskTitle.value="";save()}
+function completeTask(i){if(!s.tasks[i].done){s.tasks[i].done=true;s.xp+=s.tasks[i].xp;save()}}
+function delTask(i){s.tasks.splice(i,1);save()}
+function togglePrayer(p){s.prayers[p]=!s.prayers[p];if(s.prayers[p])s.xp+=15;let c=["fajr","dhuhr","asr","maghrib","isha"].filter(x=>s.prayers[x]).length;s.prayers.history[s.prayers.history.length-1]=c;if(c===5&&!s.prayers.bonus){s.xp+=50;s.prayers.bonus=true}save()}
+function saveBook(){s.reading.book=bookName.value||s.reading.book;s.reading.total=+totalPages.value||s.reading.total;s.reading.current=+currentPage.value||s.reading.current;save()}
+function addPages(){let p=+prompt("Pages read?")||0;if(!p)return;s.reading.today+=p;s.reading.current+=p;s.reading.week[6]+=p;s.xp+=Math.max(10,Math.floor(p/5)*10);save()}
+function addChallenge(){if(!challengeTitle.value)return;s.challenges.unshift({title:challengeTitle.value,cat:challengeCategory.value||"Personal",target:challengeTarget.value||"No target",progress:+challengeProgress.value||0,color:"green"});challengeTitle.value="";save()}
+function updateChallenge(i,v){s.challenges[i].progress=+v;s.xp+=20;save()}
+function addIdea(){if(!ideaTitle.value)return;s.ideas.unshift({title:ideaTitle.value,tags:ideaTags.value,ex:ideaExcitement.value});ideaTitle.value="";ideaTags.value="";s.xp+=5;save()}
+function ideaTask(i){s.tasks.unshift({title:s.ideas[i].title,xp:20,energy:"Medium energy",done:false});s.ideas.splice(i,1);save()}
 function render(){
-  document.getElementById("todayDate").innerText=new Date().toDateString();
-  const doneTasks=state.tasks.filter(t=>t.done).length;
-  const taskP=pct(doneTasks,state.tasks.length);
-  const prayerDone=["fajr","dhuhr","asr","maghrib","isha"].filter(p=>state.prayers[p]).length;
-  const namazP=pct(prayerDone,5);
-  const score=Math.round((taskP*.4)+(namazP*.35)+(Math.min(state.reading.pagesToday*5,100)*.25));
-
-  document.getElementById("levelTop").innerText=level();
-  document.getElementById("xpTop").innerText=state.xp;
-  document.getElementById("dailyScore").innerText=score;
-  document.getElementById("scoreFill").style.width=score+"%";
-  document.getElementById("taskPercent").innerText=taskP+"%";
-  document.getElementById("taskMini").innerText=`${doneTasks}/${state.tasks.length} done`;
-  document.getElementById("namazPercent").innerText=namazP+"%";
-  document.getElementById("namazMini").innerText=`${prayerDone}/5 done`;
-  document.getElementById("readingToday").innerText=state.reading.pagesToday;
-  document.getElementById("ideasCount").innerText=state.ideas.filter(i=>!i.archived).length;
-  document.getElementById("momentum").innerText=score>=75?"Strong":score>=45?"Building":"Needs push";
-  document.getElementById("scoreXP").innerText=state.xp;
-  document.getElementById("scoreLevel").innerText=level();
-
-  document.getElementById("chart").innerHTML=state.history.map((h,i)=>`<div class="bar"><span style="height:${i===6?score:h}%"></span></div>`).join("");
-
-  document.getElementById("taskList").innerHTML=state.tasks.map((t,i)=>`
-    <div class="item ${t.done?'done':''}">
-      <b>${t.done?'✅ ':''}${t.title}</b>
-      <div class="meta">${t.energy} · ${t.xp} XP</div>
-      ${t.done?'':`<button class="smallbtn" onclick="completeTask(${i})">Complete</button>`}
-      <button class="smallbtn danger" onclick="deleteTask(${i})">Delete</button>
-    </div>`).join("");
-
-  document.getElementById("blockList").innerHTML=state.blocks.map((b,i)=>`
-    <div class="item ${b.done?'done':''}">
-      <b>${b.start||'--'} - ${b.end||'--'} · ${b.title}</b>
-      <div class="meta">${b.type}</div>
-      ${b.done?'✅ Done':`<button class="smallbtn" onclick="completeBlock(${i})">Done</button>`}
-      <button class="smallbtn danger" onclick="deleteBlock(${i})">Delete</button>
-    </div>`).join("");
-
-  document.getElementById("objectiveList").innerHTML=state.objectives.map((o,i)=>`
-    <div class="item">
-      <b>${o.title}</b>
-      <div class="meta">${o.why||''}</div>
-      <div class="progress"><div class="fill" style="width:${o.progress}%"></div></div>
-      <input type="number" min="0" max="100" value="${o.progress}" onchange="updateObjective(${i},this.value)">
-      <button class="smallbtn danger" onclick="deleteObjective(${i})">Delete</button>
-    </div>`).join("");
-
-  document.getElementById("dashObjectives").innerHTML=state.objectives.slice(0,3).map(o=>`
-    <div class="item">
-      <b>${o.title}</b>
-      <div class="progress"><div class="fill" style="width:${o.progress}%"></div></div>
-      <div class="meta">${o.progress}% complete</div>
-    </div>`).join("");
-
-  document.getElementById("ideaList").innerHTML=state.ideas.filter(i=>!i.archived).map((idea,i)=>`
-    <div class="item">
-      <b>${idea.title}</b>
-      <div class="meta">${idea.tags||'No tags'} · Excitement ${idea.excitement}/5</div>
-      <button class="smallbtn" onclick="ideaToTask(${i})">To Task</button>
-      <button class="smallbtn secondary" onclick="archiveIdea(${i})">Archive</button>
-    </div>`).join("");
-
-  document.getElementById("achievements").innerHTML=[
-    state.tasks.length>0?"✅ First Task":"⬜ First Task",
-    state.tasks.filter(t=>t.done).length>=10?"✅ 10 Tasks":"⬜ 10 Tasks",
-    state.reading.totalPages>=100?"✅ 100 Pages Read":"⬜ 100 Pages Read",
-    prayerDone===5?"✅ Perfect Namaz Day":"⬜ Perfect Namaz Day",
-    state.ideas.length>=5?"✅ Idea Collector":"⬜ Idea Collector"
-  ].map(x=>`<div class="item">${x}</div>`).join("");
+dateText.innerText=new Date().toDateString();topLevel.innerText=lvl();topXP.innerText=s.xp;
+let done=s.tasks.filter(x=>x.done).length,tp=pct(done,s.tasks.length),pd=["fajr","dhuhr","asr","maghrib","isha"].filter(x=>s.prayers[x]).length,np=pct(pd,5),rp=Math.min(s.reading.today*5,100),score=Math.round(tp*.35+np*.4+rp*.25);
+dailyScore.innerText=score;dailyFill.style.width=score+"%";scoreNote.innerText=score>=75?"Strong momentum. Keep the streak alive.":score>=40?"Building. Finish one more thing.":"Needs a push.";
+dashTasks.innerText=tp+"%";dashNamaz.innerText=pd+"/5";dashReading.innerText=s.reading.today;dashChallenges.innerText=s.challenges.length;
+line("taskLine",[...s.taskHist.slice(0,6),tp]);bars("xpBars",s.xpHist);heat("dashHeat");heat("namazHeat");bars("readingBars",s.reading.week,"#a9cff3");
+bookDash.innerText=s.reading.book;let bp=pct(s.reading.current,s.reading.total);bookProgressText.innerText=`${bp}%`;bookFill.style.width=bp+"%";
+dashChallengeList.innerHTML=s.challenges.slice(0,3).map(c=>`<div class="card2"><b>${c.title}</b><div class="progress"><div class="fill" style="width:${c.progress}%"></div></div><p class="tiny">${c.progress}% · ${c.cat}</p></div>`).join("");
+taskList.innerHTML=s.tasks.map((t,i)=>`<div class="card2 ${t.done?'done':''}"><b>${t.done?'✅ ':''}${t.title}</b><p class="tiny">${t.energy} · ${t.xp} XP</p>${t.done?'':`<button class="miniBtn" onclick="completeTask(${i})">Complete</button>`}<button class="miniBtn danger" onclick="delTask(${i})">Delete</button></div>`).join("");
+prayerButtons.innerHTML=["fajr","dhuhr","asr","maghrib","isha"].map(p=>`<button class="prayer ${s.prayers[p]?'done':''}" onclick="togglePrayer('${p}')">✓<br>${p[0].toUpperCase()+p.slice(1)}</button>`).join("");prayerAvg.innerText=(s.prayers.history.reduce((a,b)=>a+b,0)/28).toFixed(1)+" avg / week";
+bookName.value=s.reading.book;totalPages.value=s.reading.total;currentPage.value=s.reading.current;readBookTitle.innerText=s.reading.book;readPercent.innerText=bp+"%";readFill.style.width=bp+"%";readStats.innerText=`${s.reading.current}/${s.reading.total} pages · ${s.reading.today} pages today · Annual pace: ${s.reading.today*365}`;
+challengeList.innerHTML=s.challenges.map((c,i)=>`<div class="card2"><b>${c.title}</b><p class="muted">${c.cat} · Target: ${c.target}</p><div class="progress"><div class="fill" style="width:${c.progress}%"></div></div><input type="number" value="${c.progress}" onchange="updateChallenge(${i},this.value)"></div>`).join("");
+challengeOverview.innerHTML=s.challenges.map(c=>`<p class="tiny">${c.title}</p><div class="progress"><div class="fill" style="width:${c.progress}%"></div></div>`).join("");
+line("analyticsLine",Array.from({length:30},(_,i)=>50+Math.sin(i)*20+(i%7)*3));namazTrends.innerHTML=["Fajr 71","Dhuhr 90","Asr 83","Maghrib 97","Isha 87"].map(x=>{let [n,v]=x.split(" ");return `<p>${n} <b style="float:right">${v}%</b></p><div class="progress"><div class="fill" style="width:${v}%"></div></div>`}).join("");line("readingLine",[80,110,140,95,165,180,155,180],"var(--blue)");annualPace.innerText=s.reading.today*365;
+scoreLevel.innerText=lvl();scoreXP.innerText=s.xp;let next=lvl()*500,need=next-s.xp,ring=Math.round((s.xp%500)/500*100);nextLevelXP.innerText=next;xpNeeded.innerText=need;ringPct.innerText=ring+"%";xpRing.style.setProperty("--deg",ring+"%");scoreBreakdown.innerHTML=`Tasks<div class="progress"><div class="fill" style="width:${tp}%"></div></div>Namaz<div class="progress"><div class="fill" style="width:${np}%"></div></div>Reading<div class="progress"><div class="fill" style="width:${rp}%"></div></div>`;
+achievements.innerHTML=["🔥 14-day streak","📖 500 pages","🕌 Perfect week","⚡ Lv. 10 reached","🏆 30-day streak","📚 1000 pages","💎 Lv. 20","🎯 All challenges"].map((a,i)=>`<div class="ach ${i>3?'lock':''}">${a}</div>`).join("");
+ideaList.innerHTML=s.ideas.map((it,i)=>`<div class="card2"><b>${it.title}</b><p class="tiny">${it.tags} · ${it.ex}</p><button class="miniBtn" onclick="ideaTask(${i})">To Task</button></div>`).join("");
 }
-
-function resetApp(){
-  if(confirm("Reset all Zohair Tracker data?")){
-    localStorage.removeItem("ztState");
-    location.reload();
-  }
-}
-
 render();
 </script>
 </body>
