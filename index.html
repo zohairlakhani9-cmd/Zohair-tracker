@@ -3,155 +3,1013 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Zohair Tracker V2</title>
+<title>Zohair Tracker</title>
+
 <style>
-*{box-sizing:border-box}
-:root{--bg:#090f1f;--panel:#151c2e;--panel2:#20283a;--soft:#2c3548;--text:#f8fafc;--muted:#94a3b8;--green:#21d19f;--blue:#45b8f2;--purple:#7657e8;--orange:#f59e0b;--red:#ef4444;--border:rgba(255,255,255,.10)}
-body{margin:0;background:radial-gradient(circle at top,#111d38 0,#090f1f 42%,#050914 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:96px}
-.app{max-width:520px;margin:auto;padding:18px 14px}
-h1,h2,h3,p{margin:0}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}.green{color:var(--green)}.blue{color:var(--blue)}.purple{color:var(--purple)}.orange{color:var(--orange)}
-.top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}.brand{font-size:13px;color:var(--green);font-weight:800}.title{font-size:31px;font-weight:900;line-height:1.02}.xpPill{background:rgba(255,255,255,.08);border:1px solid var(--border);padding:10px 12px;border-radius:18px;text-align:right}
-.card{background:linear-gradient(180deg,var(--panel),#101729);border:1px solid var(--border);border-radius:24px;padding:16px;margin-bottom:14px;box-shadow:0 14px 28px rgba(0,0,0,.22)}
-.card2{background:var(--panel2);border:1px solid var(--border);border-radius:18px;padding:13px;margin-top:10px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.stat{font-size:30px;font-weight:950}.label{text-transform:uppercase;letter-spacing:.08em;font-size:11px;color:var(--muted);font-weight:800}
-.progress{height:10px;background:#0b1120;border-radius:99px;overflow:hidden;margin-top:9px}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--blue))}
-input,select,textarea{width:100%;background:#0b1120;border:1px solid var(--border);color:white;border-radius:14px;padding:12px;margin-top:9px;font-size:15px;outline:none}textarea{min-height:70px;resize:none}
-button{border:0;border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,var(--green),#16a34a);color:#03110b;font-weight:900;width:100%;margin-top:9px}button.secondary{background:#2d374c;color:white}button.danger{background:#7f1d1d;color:white}.miniBtn{width:auto;padding:8px 10px;margin:8px 5px 0 0;font-size:12px}
-.screen{display:none}.screen.active{display:block}
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(9,15,31,.96);backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:7px 3px 20px;z-index:10}.nav button{background:none;color:var(--muted);width:auto;margin:0;padding:5px;font-size:10px}.nav button.active{color:var(--green)}.icon{font-size:19px;display:block}
-.chart{height:150px;display:flex;align-items:end;gap:7px;margin-top:12px;border-left:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:8px}.bar{flex:1;background:rgba(255,255,255,.04);border-radius:10px 10px 0 0;position:relative}.bar span{position:absolute;bottom:0;left:0;right:0;background:var(--blue);border-radius:10px 10px 0 0}.line svg{width:100%;height:160px;margin-top:8px}.heat{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px}.cell{aspect-ratio:1;background:#064e3b;border-radius:6px}.cell.mid{background:#0f766e}.cell.high{background:#21d19f}.prayers{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.prayer.done{background:#dffcf1;color:#064e3b}.ring{width:118px;height:118px;border-radius:50%;background:conic-gradient(var(--purple) var(--deg),#e5e7eb 0);display:grid;place-items:center}.ringInner{width:82px;height:82px;background:#111827;border-radius:50%;display:grid;place-items:center;text-align:center}
-.achGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ach{background:#111827;border-radius:16px;padding:18px;text-align:center;color:#ddd}.ach.lock{opacity:.35}.row{display:flex;gap:10px}.row>*{flex:1}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#eef1f5;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#738195;
+  --border:#dce2ea;
+  --soft:#f5f7fa;
+  --green:#1d9e75;
+  --green-soft:#e1f5ee;
+  --blue:#378add;
+  --blue-soft:#e6f1fb;
+  --purple:#534ab7;
+  --purple-soft:#eeedfe;
+  --amber:#ba7517;
+  --amber-soft:#faeeda;
+  --coral:#d85a30;
+  --coral-soft:#fde9e2;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.app{
+  max-width:540px;
+  margin:0 auto;
+  min-height:100vh;
+  background:var(--bg);
+}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px 10px;
+}
+.logo{
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:-.3px;
+}
+.logo span{color:var(--green)}
+.xpbox{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--muted);
+}
+.xpbadge{
+  background:var(--green-soft);
+  color:#0f6e56;
+  padding:4px 9px;
+  border-radius:999px;
+  font-weight:700;
+}
+.nav{
+  display:flex;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-top:1px solid #f2f4f7;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav button{
+  flex-shrink:0;
+  background:transparent;
+  border:0;
+  padding:11px 14px;
+  color:var(--muted);
+  font-size:13px;
+  border-bottom:2px solid transparent;
+}
+.nav button.active{
+  color:var(--green);
+  font-weight:700;
+  border-bottom-color:var(--green);
+}
+.content{padding:14px 14px 90px}
+.page{display:none}
+.page.active{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:10px;
+}
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+.card-title{
+  font-size:13px;
+  font-weight:700;
+}
+.badge{
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:999px;
+  font-weight:700;
+}
+.green-badge{background:var(--green-soft);color:#0f6e56}
+.blue-badge{background:var(--blue-soft);color:#185fa5}
+.purple-badge{background:var(--purple-soft);color:#3c3489}
+.amber-badge{background:var(--amber-soft);color:#854f0b}
+.coral-badge{background:var(--coral-soft);color:#9a3412}
+.metric{
+  font-size:29px;
+  line-height:1;
+  font-weight:800;
+}
+.metric span{
+  font-size:15px;
+  color:var(--muted);
+}
+.label{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:5px;
+}
+.tiny{
+  font-size:11px;
+  color:var(--muted);
+}
+.section-label{
+  margin:16px 2px 8px;
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  font-weight:700;
+}
+.progress{
+  height:7px;
+  background:var(--soft);
+  border-radius:99px;
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  border-radius:99px;
+  transition:width .3s;
+}
+.green-fill{background:var(--green)}
+.blue-fill{background:var(--blue)}
+.purple-fill{background:var(--purple)}
+.amber-fill{background:var(--amber)}
+.coral-fill{background:var(--coral)}
+.input,select,textarea{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  background:white;
+  color:var(--text);
+  border-radius:12px;
+  font-size:14px;
+  margin-bottom:10px;
+}
+textarea{min-height:70px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{
+  width:100%;
+  border:0;
+  background:var(--green);
+  color:white;
+  padding:11px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:14px;
+}
+.btn.secondary{
+  background:var(--soft);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+.btn.danger{
+  background:#fee2e2;
+  color:#991b1b;
+}
+.mini-btn{
+  width:auto;
+  padding:7px 10px;
+  font-size:12px;
+  margin-top:8px;
+  margin-right:5px;
+}
+.item{
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+.item:last-child{border-bottom:0}
+.item-title{
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.item-meta{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+.done{text-decoration:line-through;opacity:.55}
+.namaz-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+}
+.namaz-pill{
+  text-align:center;
+  padding:9px 4px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:white;
+  color:var(--muted);
+  font-size:11px;
+}
+.namaz-pill .check{
+  display:block;
+  font-size:18px;
+  margin-bottom:2px;
+}
+.namaz-pill.done{
+  background:var(--green-soft);
+  border-color:#5dcaa5;
+  color:#0f6e56;
+  font-weight:700;
+}
+.heatmap{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:4px;
+}
+.hm{
+  aspect-ratio:1;
+  border-radius:3px;
+  background:var(--soft);
+}
+.hm1{background:#b9ebda}
+.hm2{background:#7bd7b8}
+.hm3{background:#3fbd91}
+.hm4{background:#1d9e75}
+.hm5{background:#0f6e56}
+.chart{
+  width:100%;
+  height:130px;
+}
+.chart-small{height:100px}
+svg{width:100%;height:100%}
+.stat-mini{
+  text-align:center;
+  padding:12px 6px;
+}
+.stat-mini .num{
+  font-size:22px;
+  font-weight:800;
+}
+.ring-wrap{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.ring{
+  width:104px;
+  height:104px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(var(--purple) var(--pct), var(--purple-soft) 0);
+}
+.ring-inner{
+  width:74px;
+  height:74px;
+  background:white;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  text-align:center;
+}
+.ach-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.achievement{
+  text-align:center;
+  background:var(--soft);
+  border-radius:12px;
+  padding:10px 5px;
+}
+.achievement.locked{opacity:.35}
+.achievement .icon{font-size:22px;margin-bottom:4px}
+.toast{
+  display:none;
+  background:var(--green-soft);
+  color:#0f6e56;
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:13px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+.toast.show{display:block}
 </style>
 </head>
+
 <body>
 <div class="app">
 
-<section id="dashboard" class="screen active">
-  <div class="top"><div><div class="brand">Zohair Tracker</div><div class="title">Control Dashboard</div><div class="tiny" id="dateText"></div></div><div class="xpPill"><div class="tiny">Level <span id="topLevel"></span></div><b class="green"><span id="topXP"></span> XP</b></div></div>
-  <div class="card"><div class="label">Today’s Score</div><div class="stat"><span id="dailyScore"></span>%</div><div class="progress"><div id="dailyFill" class="fill"></div></div><p class="tiny" id="scoreNote"></p></div>
-  <div class="grid2">
-    <div class="card"><div class="label">Tasks</div><div class="stat" id="dashTasks"></div><p class="green tiny">completion</p></div>
-    <div class="card"><div class="label">Namaz</div><div class="stat" id="dashNamaz"></div><p class="green tiny">daily consistency</p></div>
-    <div class="card"><div class="label">Reading</div><div class="stat blue" id="dashReading"></div><p class="tiny">pages today</p></div>
-    <div class="card"><div class="label">Challenges</div><div class="stat purple" id="dashChallenges"></div><p class="tiny">active</p></div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo">Zohair <span>Tracker</span></div>
+      <div class="xpbox">
+        <span class="xpbadge">⚡ <span id="topXP">0</span> XP</span>
+        <span>Lv. <span id="topLevel">1</span></span>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+      <button onclick="showPage('entry',this)">Daily Entry</button>
+      <button onclick="showPage('challenges',this)">Challenges</button>
+      <button onclick="showPage('analytics',this)">Analytics</button>
+      <button onclick="showPage('scores',this)">Scores</button>
+    </div>
   </div>
-  <div class="card"><h3>7-Day Task Completion</h3><div class="line" id="taskLine"></div></div>
-  <div class="card"><h3>Weekly XP Momentum</h3><div class="chart" id="xpBars"></div></div>
-  <div class="card"><h3>Prayer Consistency</h3><p class="tiny">Last 28 days</p><div class="heat" id="dashHeat"></div></div>
-  <div class="card"><h3>Reading Progress</h3><p><b id="bookDash"></b> <span class="tiny" id="bookProgressText"></span></p><div class="progress"><div id="bookFill" class="fill"></div></div><div class="chart" id="readingBars"></div></div>
-  <div class="card"><h3>Active Challenges</h3><div id="dashChallengeList"></div></div>
-</section>
 
-<section id="tasks" class="screen">
-  <div class="top"><div class="title">Tasks</div></div>
-  <div class="card"><input id="taskTitle" placeholder="Task title"><div class="row"><select id="taskPriority"><option value="10">Low</option><option value="20">Medium</option><option value="30">High</option><option value="50">Critical</option></select><select id="taskEnergy"><option>Low energy</option><option>Medium energy</option><option>High energy</option></select></div><button onclick="addTask()">Add Task</button></div>
-  <div id="taskList"></div>
-</section>
+  <div class="content">
 
-<section id="namaz" class="screen">
-  <div class="top"><div class="title">Namaz</div></div>
-  <div class="card"><h3>Prayer Tracker</h3><div class="prayers" id="prayerButtons"></div><p class="tiny" id="prayerAvg"></p></div>
-  <div class="card"><h3>28-Day Heatmap</h3><div class="heat" id="namazHeat"></div></div>
-</section>
+    <div id="page-dashboard" class="page active">
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Today's tasks</span>
+            <span class="badge green-badge" id="taskBadge">0%</span>
+          </div>
+          <div class="metric"><span id="tasksDone">0</span><span>/<span id="tasksTotal">0</span></span></div>
+          <div class="label">Completed today</div>
+          <div class="tiny" id="taskAvgText"></div>
+        </div>
 
-<section id="reading" class="screen">
-  <div class="top"><div class="title">Reading</div></div>
-  <div class="card"><input id="bookName" placeholder="Book name"><div class="row"><input id="totalPages" type="number" placeholder="Total pages"><input id="currentPage" type="number" placeholder="Current page"></div><button onclick="saveBook()">Save Book Progress</button><button class="secondary" onclick="addPages()">Add Pages Read Today</button></div>
-  <div class="card"><h3 id="readBookTitle"></h3><div class="stat blue" id="readPercent"></div><div class="progress"><div id="readFill" class="fill"></div></div><p class="tiny" id="readStats"></p></div>
-</section>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Namaz today</span>
+            <span class="badge green-badge" id="namazBadge">0/5</span>
+          </div>
+          <div class="metric"><span id="namazDone">0</span><span>/5</span></div>
+          <div class="label" id="namazLabel">Track your prayers</div>
+          <div style="margin-top:9px"><span class="badge amber-badge">🔥 <span id="namazStreak">0</span> day streak</span></div>
+        </div>
+      </div>
 
-<section id="challenges" class="screen">
-  <div class="top"><div class="title">Challenges</div></div>
-  <div class="card"><input id="challengeTitle" placeholder="Challenge title"><input id="challengeCategory" placeholder="Category"><div class="row"><input id="challengeTarget" placeholder="Target date"><input id="challengeProgress" type="number" placeholder="%"></div><button onclick="addChallenge()">Add Challenge</button></div>
-  <div class="card"><h3>Active Challenges</h3><div id="challengeList"></div></div>
-  <div class="card"><h3>Challenge Overview</h3><div id="challengeOverview"></div></div>
-</section>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Reading today</span>
+            <span class="badge blue-badge"><span id="pagesTodayBadge">0</span> pages</span>
+          </div>
+          <div class="metric" id="pagesToday">0</div>
+          <div class="label">Pages read</div>
+          <div class="tiny">Book: <strong id="dashBook">No book set</strong></div>
+        </div>
 
-<section id="analytics" class="screen">
-  <div class="top"><div class="title">Analytics</div></div>
-  <div class="grid3"><div class="card"><div class="stat green">14</div><p class="tiny">Best streak</p></div><div class="card"><div class="stat">74%</div><p class="tiny">Avg completion</p></div><div class="card"><div class="stat purple">87</div><p class="tiny">Best week</p></div></div>
-  <div class="card"><h3>30-Day Task Completion</h3><div class="line" id="analyticsLine"></div></div>
-  <div class="card"><h3>Namaz Trends</h3><div id="namazTrends"></div></div>
-  <div class="card"><h3>Reading Momentum</h3><div class="line" id="readingLine"></div><p class="tiny">Annual pace: <b id="annualPace"></b> pages</p></div>
-</section>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Momentum</span>
+            <span class="badge purple-badge" id="momentumDelta">+0</span>
+          </div>
+          <div class="metric" id="weeklyScore">0</div>
+          <div class="label">Weekly score</div>
+          <div class="tiny">Daily score: <strong id="dailyScore">0</strong></div>
+        </div>
+      </div>
 
-<section id="scores" class="screen">
-  <div class="top"><div class="title">Scores</div></div>
-  <div class="card"><h3>Level <span id="scoreLevel"></span> — Consistent</h3><div class="row" style="align-items:center"><div class="ring" id="xpRing"><div class="ringInner"><b id="ringPct"></b><span class="tiny">to next</span></div></div><div><p>Current XP <b id="scoreXP"></b></p><p>Next level <b id="nextLevelXP"></b></p><p>XP needed <b class="purple" id="xpNeeded"></b></p><p>This week <b class="green">+240 XP</b></p></div></div></div>
-  <div class="card"><h3>Score Breakdown This Week</h3><div id="scoreBreakdown"></div></div>
-  <div class="card"><h3>Achievements</h3><div class="achGrid" id="achievements"></div></div>
-</section>
+      <div class="section-label">Task completion — last 7 days</div>
+      <div class="card"><div id="taskChart" class="chart chart-small"></div></div>
 
-<section id="ideas" class="screen">
-  <div class="top"><div class="title">Ideas</div></div>
-  <div class="card"><input id="ideaTitle" placeholder="Drop idea here"><input id="ideaTags" placeholder="Tags"><select id="ideaExcitement"><option>Excitement 3</option><option>Excitement 4</option><option>Excitement 5</option></select><button onclick="addIdea()">Park</button></div>
-  <div id="ideaList"></div>
-</section>
+      <div class="section-label">Namaz consistency</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Prayer tracker</span>
+          <span class="badge green-badge"><span id="prayerAvg">0</span> avg / day</span>
+        </div>
+        <div id="dashNamazGrid" class="namaz-grid"></div>
+        <div style="margin-top:12px">
+          <div class="tiny" style="margin-bottom:6px">Last 28 days</div>
+          <div id="namazHeat" class="heatmap"></div>
+        </div>
+      </div>
 
-</div>
+      <div class="section-label">Reading progress</div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title" id="readingBookTitle">No book set</span>
+          <span class="badge blue-badge" id="bookProgressBadge">0%</span>
+        </div>
+        <div class="progress"><div id="bookProgressFill" class="fill blue-fill" style="width:0%"></div></div>
+        <div class="tiny" style="margin-top:8px" id="bookProgressText">Set your current book in Daily Entry.</div>
+        <div id="readingChart" class="chart chart-small" style="margin-top:10px"></div>
+      </div>
 
-<div class="nav">
-<button class="active" onclick="tab('dashboard',this)"><span class="icon">▦</span>Dash</button>
-<button onclick="tab('tasks',this)"><span class="icon">☑</span>Tasks</button>
-<button onclick="tab('namaz',this)"><span class="icon">🕌</span>Namaz</button>
-<button onclick="tab('reading',this)"><span class="icon">📖</span>Read</button>
-<button onclick="tab('challenges',this)"><span class="icon">◎</span>Chal</button>
-<button onclick="tab('analytics',this)"><span class="icon">⌁</span>Stats</button>
-<button onclick="tab('scores',this)"><span class="icon">🏆</span>XP</button>
-<button onclick="tab('ideas',this)"><span class="icon">💡</span>Ideas</button>
+      <div class="section-label">Active challenges</div>
+      <div class="card" id="dashboardChallenges"></div>
+    </div>
+
+    <div id="page-entry" class="page">
+      <div class="toast" id="toast">Saved.</div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Quick execution today</span>
+          <span class="badge green-badge" id="entryDateBadge"></span>
+        </div>
+
+        <input id="newTaskTitle" class="input" placeholder="Add task for today">
+        <select id="newTaskXP" class="input">
+          <option value="10">Low priority · 10 XP</option>
+          <option value="20">Medium priority · 20 XP</option>
+          <option value="30">High priority · 30 XP</option>
+          <option value="50">Critical · 50 XP</option>
+        </select>
+        <button class="btn" onclick="addTask()">Add task</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Today's task list</span>
+          <span class="badge green-badge" id="entryTaskPct">0%</span>
+        </div>
+        <div id="todayTaskList"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Namaz completed</span>
+          <span class="badge green-badge" id="entryNamazCount">0/5</span>
+        </div>
+        <div id="entryNamazGrid" class="namaz-grid"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Reading tracker</span>
+          <span class="badge blue-badge" id="entryReadingPct">0%</span>
+        </div>
+        <input id="bookTitleInput" class="input" placeholder="Current book title">
+        <div class="form-row">
+          <input id="currentPageInput" class="input" type="number" placeholder="Current page">
+          <input id="totalPagesInput" class="input" type="number" placeholder="Total pages">
+        </div>
+        <input id="pagesReadInput" class="input" type="number" placeholder="Pages read right now">
+        <button class="btn" onclick="saveReading()">Save reading</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">End of day notes</span>
+          <span class="badge amber-badge">Optional</span>
+        </div>
+        <input id="winInput" class="input" placeholder="Win of the day">
+        <textarea id="noteInput" class="input" placeholder="Daily note"></textarea>
+        <button class="btn secondary" onclick="saveNote()">Save note</button>
+      </div>
+    </div>
+
+    <div id="page-challenges" class="page">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Add challenge</span>
+          <span class="badge green-badge">Long-term</span>
+        </div>
+        <input id="challengeTitleInput" class="input" placeholder="Challenge title">
+        <input id="challengeCategoryInput" class="input" placeholder="Category">
+        <div class="form-row">
+          <input id="challengeTargetInput" class="input" placeholder="Target date">
+          <input id="challengeProgressInput" class="input" type="number" placeholder="Progress %">
+        </div>
+        <button class="btn" onclick="addChallenge()">Add challenge</button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Active challenges</span>
+          <span class="badge green-badge"><span id="challengeCount">0</span> active</span>
+        </div>
+        <div id="challengeList"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Challenge overview</span>
+        </div>
+        <div id="challengeChart" class="chart"></div>
+      </div>
+    </div>
+
+    <div id="page-analytics" class="page">
+      <div class="grid3">
+        <div class="card stat-mini"><div class="num" id="bestStreak">0</div><div class="label">Best streak</div></div>
+        <div class="card stat-mini"><div class="num" id="avgCompletion">0%</div><div class="label">Avg completion</div></div>
+        <div class="card stat-mini"><div class="num" id="bestWeek">0</div><div class="label">Best week</div></div>
+      </div>
+
+      <div class="section-label">30-day task completion</div>
+      <div class="card"><div id="monthlyTaskChart" class="chart"></div></div>
+
+      <div class="section-label">Prayer consistency — 30 days</div>
+      <div class="card" id="prayerBreakdown"></div>
+
+      <div class="section-label">Reading momentum</div>
+      <div class="card">
+        <div id="readingTrendChart" class="chart chart-small"></div>
+        <div class="tiny" style="margin-top:8px">Annual pace: <strong id="annualPace">0</strong> pages</div>
+      </div>
+    </div>
+
+    <div id="page-scores" class="page">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Level <span id="scoreLevel">1</span> — Consistent</span>
+          <span class="badge purple-badge"><span id="scoreXP">0</span> XP</span>
+        </div>
+        <div class="ring-wrap">
+          <div class="ring" id="xpRing"><div class="ring-inner"><div><strong id="ringPct">0%</strong><br><span class="tiny">to next</span></div></div></div>
+          <div>
+            <div class="tiny">Current XP</div>
+            <strong id="currentXP">0</strong>
+            <div class="tiny" style="margin-top:8px">Next level</div>
+            <strong id="nextLevelXP">0</strong>
+            <div class="tiny" style="margin-top:8px">XP needed</div>
+            <strong style="color:var(--purple)" id="xpNeeded">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Score breakdown this week</div>
+      <div class="card" id="scoreBreakdown"></div>
+
+      <div class="section-label">Achievements</div>
+      <div class="card"><div id="achievements" class="ach-grid"></div></div>
+
+      <button class="btn danger" onclick="resetApp()">Reset app data</button>
+    </div>
+
+  </div>
 </div>
 
 <script>
-const today=new Date().toISOString().slice(0,10);
-let s=JSON.parse(localStorage.getItem("ztV2"))||{
-xp:1280,tasks:[],ideas:[],reading:{book:"Atomic Habits",total:320,current:198,today:0,week:[0,24,40,18,32,0,30]},
-prayers:{date:today,fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false,history:Array.from({length:28},()=>Math.floor(Math.random()*5)+1)},
-challenges:[
-{title:"ADHD Education",cat:"Personal development",target:"Dec 2025",progress:65,color:"green"},
-{title:"Padel Development",cat:"Sports",target:"Mar 2026",progress:40,color:"blue"},
-{title:"Business Growth",cat:"Career",target:"Jun 2026",progress:55,color:"purple"},
-{title:"Career Evaluation",cat:"Career",target:"Sep 2025",progress:90,color:"orange"},
-{title:"Hydroponics Research",cat:"Personal project",target:"Dec 2025",progress:25,color:"red"}
-],
-taskHist:[80,50,65,72,88,70,0],xpHist:[120,90,140,160,220,180,80]
+const today = new Date().toISOString().slice(0,10);
+const prayers = ["fajr","dhuhr","asr","maghrib","isha"];
+const prayerLabels = {fajr:"Fajr",dhuhr:"Dhuhr",asr:"Asr",maghrib:"Maghrib",isha:"Isha"};
+
+const starter = {
+  xp: 0,
+  tasks: [],
+  reading: {
+    bookTitle: "Atomic Habits",
+    currentPage: 0,
+    totalPages: 320,
+    pagesByDate: {}
+  },
+  entries: {},
+  challenges: [
+    {title:"Build Zohair Tracker",category:"Personal OS",target:"Today",progress:35,color:"green"},
+    {title:"ADHD Education",category:"Personal development",target:"Dec 2025",progress:65,color:"green"},
+    {title:"Padel Development",category:"Sports",target:"Mar 2026",progress:40,color:"blue"},
+    {title:"Business Growth",category:"Career",target:"Jun 2026",progress:55,color:"purple"},
+    {title:"Career Evaluation",category:"Career",target:"Sep 2025",progress:90,color:"amber"},
+    {title:"Hydroponics Research",category:"Personal project",target:"Dec 2025",progress:25,color:"coral"}
+  ],
+  xpAwards: {}
 };
-if(s.prayers.date!==today){s.prayers={date:today,fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false,history:[...s.prayers.history.slice(1),0]};s.reading.today=0}
-function save(){localStorage.setItem("ztV2",JSON.stringify(s));render()}
-function lvl(){return Math.floor(s.xp/500)+1}
-function pct(a,b){return b?Math.round(a/b*100):0}
-function tab(id,b){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
-function line(id,data,color="var(--green)"){let pts=data.map((v,i)=>`${i*(100/(data.length-1))},${150-(v*1.3)}`).join(" ");document.getElementById(id).innerHTML=`<svg viewBox="0 0 100 160" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5"/><polygon points="0,160 ${pts} 100,160" fill="rgba(33,209,159,.13)"/></svg>`}
-function bars(id,data,color="var(--blue)"){document.getElementById(id).innerHTML=data.map(v=>`<div class="bar"><span style="height:${Math.max(v/2.5,8)}%;background:${color}"></span></div>`).join("")}
-function heat(id){document.getElementById(id).innerHTML=s.prayers.history.map(v=>`<div class="cell ${v>=4?'high':v>=2?'mid':''}"></div>`).join("")}
-function addTask(){let t=taskTitle.value.trim();if(!t)return;s.tasks.unshift({title:t,xp:+taskPriority.value,energy:taskEnergy.value,done:false});taskTitle.value="";save()}
-function completeTask(i){if(!s.tasks[i].done){s.tasks[i].done=true;s.xp+=s.tasks[i].xp;save()}}
-function delTask(i){s.tasks.splice(i,1);save()}
-function togglePrayer(p){s.prayers[p]=!s.prayers[p];if(s.prayers[p])s.xp+=15;let c=["fajr","dhuhr","asr","maghrib","isha"].filter(x=>s.prayers[x]).length;s.prayers.history[s.prayers.history.length-1]=c;if(c===5&&!s.prayers.bonus){s.xp+=50;s.prayers.bonus=true}save()}
-function saveBook(){s.reading.book=bookName.value||s.reading.book;s.reading.total=+totalPages.value||s.reading.total;s.reading.current=+currentPage.value||s.reading.current;save()}
-function addPages(){let p=+prompt("Pages read?")||0;if(!p)return;s.reading.today+=p;s.reading.current+=p;s.reading.week[6]+=p;s.xp+=Math.max(10,Math.floor(p/5)*10);save()}
-function addChallenge(){if(!challengeTitle.value)return;s.challenges.unshift({title:challengeTitle.value,cat:challengeCategory.value||"Personal",target:challengeTarget.value||"No target",progress:+challengeProgress.value||0,color:"green"});challengeTitle.value="";save()}
-function updateChallenge(i,v){s.challenges[i].progress=+v;s.xp+=20;save()}
-function addIdea(){if(!ideaTitle.value)return;s.ideas.unshift({title:ideaTitle.value,tags:ideaTags.value,ex:ideaExcitement.value});ideaTitle.value="";ideaTags.value="";s.xp+=5;save()}
-function ideaTask(i){s.tasks.unshift({title:s.ideas[i].title,xp:20,energy:"Medium energy",done:false});s.ideas.splice(i,1);save()}
-function render(){
-dateText.innerText=new Date().toDateString();topLevel.innerText=lvl();topXP.innerText=s.xp;
-let done=s.tasks.filter(x=>x.done).length,tp=pct(done,s.tasks.length),pd=["fajr","dhuhr","asr","maghrib","isha"].filter(x=>s.prayers[x]).length,np=pct(pd,5),rp=Math.min(s.reading.today*5,100),score=Math.round(tp*.35+np*.4+rp*.25);
-dailyScore.innerText=score;dailyFill.style.width=score+"%";scoreNote.innerText=score>=75?"Strong momentum. Keep the streak alive.":score>=40?"Building. Finish one more thing.":"Needs a push.";
-dashTasks.innerText=tp+"%";dashNamaz.innerText=pd+"/5";dashReading.innerText=s.reading.today;dashChallenges.innerText=s.challenges.length;
-line("taskLine",[...s.taskHist.slice(0,6),tp]);bars("xpBars",s.xpHist);heat("dashHeat");heat("namazHeat");bars("readingBars",s.reading.week,"#a9cff3");
-bookDash.innerText=s.reading.book;let bp=pct(s.reading.current,s.reading.total);bookProgressText.innerText=`${bp}%`;bookFill.style.width=bp+"%";
-dashChallengeList.innerHTML=s.challenges.slice(0,3).map(c=>`<div class="card2"><b>${c.title}</b><div class="progress"><div class="fill" style="width:${c.progress}%"></div></div><p class="tiny">${c.progress}% · ${c.cat}</p></div>`).join("");
-taskList.innerHTML=s.tasks.map((t,i)=>`<div class="card2 ${t.done?'done':''}"><b>${t.done?'✅ ':''}${t.title}</b><p class="tiny">${t.energy} · ${t.xp} XP</p>${t.done?'':`<button class="miniBtn" onclick="completeTask(${i})">Complete</button>`}<button class="miniBtn danger" onclick="delTask(${i})">Delete</button></div>`).join("");
-prayerButtons.innerHTML=["fajr","dhuhr","asr","maghrib","isha"].map(p=>`<button class="prayer ${s.prayers[p]?'done':''}" onclick="togglePrayer('${p}')">✓<br>${p[0].toUpperCase()+p.slice(1)}</button>`).join("");prayerAvg.innerText=(s.prayers.history.reduce((a,b)=>a+b,0)/28).toFixed(1)+" avg / week";
-bookName.value=s.reading.book;totalPages.value=s.reading.total;currentPage.value=s.reading.current;readBookTitle.innerText=s.reading.book;readPercent.innerText=bp+"%";readFill.style.width=bp+"%";readStats.innerText=`${s.reading.current}/${s.reading.total} pages · ${s.reading.today} pages today · Annual pace: ${s.reading.today*365}`;
-challengeList.innerHTML=s.challenges.map((c,i)=>`<div class="card2"><b>${c.title}</b><p class="muted">${c.cat} · Target: ${c.target}</p><div class="progress"><div class="fill" style="width:${c.progress}%"></div></div><input type="number" value="${c.progress}" onchange="updateChallenge(${i},this.value)"></div>`).join("");
-challengeOverview.innerHTML=s.challenges.map(c=>`<p class="tiny">${c.title}</p><div class="progress"><div class="fill" style="width:${c.progress}%"></div></div>`).join("");
-line("analyticsLine",Array.from({length:30},(_,i)=>50+Math.sin(i)*20+(i%7)*3));namazTrends.innerHTML=["Fajr 71","Dhuhr 90","Asr 83","Maghrib 97","Isha 87"].map(x=>{let [n,v]=x.split(" ");return `<p>${n} <b style="float:right">${v}%</b></p><div class="progress"><div class="fill" style="width:${v}%"></div></div>`}).join("");line("readingLine",[80,110,140,95,165,180,155,180],"var(--blue)");annualPace.innerText=s.reading.today*365;
-scoreLevel.innerText=lvl();scoreXP.innerText=s.xp;let next=lvl()*500,need=next-s.xp,ring=Math.round((s.xp%500)/500*100);nextLevelXP.innerText=next;xpNeeded.innerText=need;ringPct.innerText=ring+"%";xpRing.style.setProperty("--deg",ring+"%");scoreBreakdown.innerHTML=`Tasks<div class="progress"><div class="fill" style="width:${tp}%"></div></div>Namaz<div class="progress"><div class="fill" style="width:${np}%"></div></div>Reading<div class="progress"><div class="fill" style="width:${rp}%"></div></div>`;
-achievements.innerHTML=["🔥 14-day streak","📖 500 pages","🕌 Perfect week","⚡ Lv. 10 reached","🏆 30-day streak","📚 1000 pages","💎 Lv. 20","🎯 All challenges"].map((a,i)=>`<div class="ach ${i>3?'lock':''}">${a}</div>`).join("");
-ideaList.innerHTML=s.ideas.map((it,i)=>`<div class="card2"><b>${it.title}</b><p class="tiny">${it.tags} · ${it.ex}</p><button class="miniBtn" onclick="ideaTask(${i})">To Task</button></div>`).join("");
+
+let state = JSON.parse(localStorage.getItem("zohairTrackerV3")) || starter;
+
+function todayEntry(){
+  if(!state.entries[today]){
+    state.entries[today] = {
+      date:today,
+      prayers:{fajr:false,dhuhr:false,asr:false,maghrib:false,isha:false},
+      win:"",
+      note:""
+    };
+  }
+  return state.entries[today];
 }
-render();
+
+function save(){
+  localStorage.setItem("zohairTrackerV3", JSON.stringify(state));
+  render();
+}
+
+function award(key, amount){
+  if(state.xpAwards[key]) return;
+  state.xp += amount;
+  state.xpAwards[key] = true;
+}
+
+function showToast(text="Saved."){
+  const t=document.getElementById("toast");
+  t.innerText=text;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+function levelFromXP(xp){
+  return Math.floor(1 + Math.sqrt(xp / 100));
+}
+
+function xpForLevel(level){
+  return level * level * 100;
+}
+
+function xpProgress(){
+  const level = levelFromXP(state.xp);
+  const current = xpForLevel(level);
+  const next = xpForLevel(level+1);
+  const pct = Math.round(((state.xp-current)/(next-current))*100);
+  return {level,current,next,pct,needed:next-state.xp};
+}
+
+function getLastNDates(n){
+  const arr=[];
+  for(let i=n-1;i>=0;i--){
+    const d=new Date();
+    d.setDate(d.getDate()-i);
+    arr.push(d.toISOString().slice(0,10));
+  }
+  return arr;
+}
+
+function tasksToday(){
+  return state.tasks.filter(t=>t.date===today);
+}
+
+function taskPctForDate(date){
+  const list=state.tasks.filter(t=>t.date===date);
+  if(!list.length) return 0;
+  return Math.round(list.filter(t=>t.done).length/list.length*100);
+}
+
+function namazCountForDate(date){
+  const e=state.entries[date];
+  if(!e) return 0;
+  return prayers.filter(p=>e.prayers[p]).length;
+}
+
+function pagesForDate(date){
+  return state.reading.pagesByDate[date] || 0;
+}
+
+function dailyScore(date=today){
+  const taskPct = taskPctForDate(date);
+  const namazPct = Math.round(namazCountForDate(date)/5*100);
+  const readPct = Math.min(pagesForDate(date)*5,100);
+  return Math.round(taskPct*.4 + namazPct*.4 + readPct*.2);
+}
+
+function showPage(id,btn){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page-"+id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+}
+
+function lineChart(id,data,color){
+  const max=100;
+  const pts=data.map((v,i)=>{
+    const x=i*(100/(data.length-1));
+    const y=95-(v/max*85);
+    return `${x},${y}`;
+  }).join(" ");
+  document.getElementById(id).innerHTML = `
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+    <polygon points="0,100 ${pts} 100,100" fill="${color}" opacity=".08"></polygon>
+  </svg>`;
+}
+
+function barChart(id,data,color){
+  const max=Math.max(...data,1);
+  document.getElementById(id).innerHTML = `
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    ${data.map((v,i)=>{
+      const w=100/data.length-2;
+      const x=i*(100/data.length)+1;
+      const h=Math.max((v/max)*85,4);
+      const y=95-h;
+      return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${color}" opacity=".75"></rect>`;
+    }).join("")}
+  </svg>`;
+}
+
+function horizontalBars(id,items){
+  document.getElementById(id).innerHTML = items.map(it=>`
+    <div style="margin-bottom:9px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
+        <span>${it.label}</span><strong>${it.value}${it.suffix||"%"}</strong>
+      </div>
+      <div class="progress"><div class="fill ${it.color}-fill" style="width:${Math.min(it.value,100)}%"></div></div>
+    </div>
+  `).join("");
+}
+
+function addTask(){
+  const title=document.getElementById("newTaskTitle").value.trim();
+  const xp=Number(document.getElementById("newTaskXP").value);
+  if(!title) return;
+  state.tasks.unshift({title,xp,date:today,done:false,createdAt:Date.now()});
+  document.getElementById("newTaskTitle").value="";
+  save();
+  showToast("Task added.");
+}
+
+function completeTask(i){
+  const task=tasksToday()[i];
+  const realIndex=state.tasks.indexOf(task);
+  if(realIndex<0) return;
+  state.tasks[realIndex].done=!state.tasks[realIndex].done;
+  if(state.tasks[realIndex].done){
+    award("task-"+state.tasks[realIndex].createdAt, state.tasks[realIndex].xp);
+  }
+  save();
+}
+
+function deleteTask(i){
+  const task=tasksToday()[i];
+  state.tasks=state.tasks.filter(t=>t!==task);
+  save();
+}
+
+function togglePrayer(name){
+  const e=todayEntry();
+  e.prayers[name]=!e.prayers[name];
+  if(e.prayers[name]) award("prayer-"+today+"-"+name,15);
+  const c=prayers.filter(p=>e.prayers[p]).length;
+  if(c===5) award("perfect-namaz-"+today,50);
+  save();
+}
+
+function saveReading(){
+  const book=document.getElementById("bookTitleInput").value.trim();
+  const current=Number(document.getElementById("currentPageInput").value);
+  const total=Number(document.getElementById("totalPagesInput").value);
+  const pages=Number(document.getElementById("pagesReadInput").value);
+
+  if(book) state.reading.bookTitle=book;
+  if(total>0) state.reading.totalPages=total;
+  if(current>=0) state.reading.currentPage=current;
+
+  if(pages>0){
+    state.reading.currentPage += pages;
+    state.reading.pagesByDate[today]=(state.reading.pagesByDate[today]||0)+pages;
+    award("reading-"+today+"-"+Date.now(), Math.max(10, Math.round(pages/2)));
+  }
+
+  document.getElementById("pagesReadInput").value="";
+  save();
+  showToast("Reading saved.");
+}
+
+function saveNote(){
+  const e=todayEntry();
+  e.win=document.getElementById("winInput").value;
+  e.note=document.getElementById("noteInput").value;
+  save();
+  showToast("Note saved.");
+}
+
+function addChallenge(){
+  const title=document.getElementById("challengeTitleInput").value.trim();
+  if(!title) return;
+  state.challenges.unshift({
+    title,
+    category:document.getElementById("challengeCategoryInput").value || "Personal",
+    target:document.getElementById("challengeTargetInput").value || "No target",
+    progress:Number(document.getElementById("challengeProgressInput").value)||0,
+    color:"green"
+  });
+  document.getElementById("challengeTitleInput").value="";
+  document.getElementById("challengeCategoryInput").value="";
+  document.getElementById("challengeTargetInput").value="";
+  document.getElementById("challengeProgressInput").value="";
+  save();
+}
+
+function updateChallenge(i,value){
+  const old=state.challenges[i].progress;
+  const next=Number(value)||0;
+  state.challenges[i].progress=next;
+  if(next>old) award("challenge-"+i+"-"+next,25);
+  save();
+}
+
+function deleteChallenge(i){
+  state.challenges.splice(i,1);
+  save();
+}
+
+function renderNamazGrid(id){
+  const e=todayEntry();
+  document.getElementById(id).innerHTML=prayers.map(p=>`
+    <button class="namaz-pill ${e.prayers[p]?'done':''}" onclick="togglePrayer('${p}')">
+      <span class="check">${e.prayers[p]?'✓':'○'}</span>
+      ${prayerLabels[p]}
+    </button>
+  `).join("");
+}
+
+function renderHeatmap(){
+  const dates=getLastNDates(28);
+  document.getElementById("namazHeat").innerHTML=dates.map(d=>{
+    const c=namazCountForDate(d);
+    return `<div class="hm hm${c}"></div>`;
+  }).join("");
+}
+
+function currentStreak(){
+  let streak=0;
+  for(let i=0;i<365;i++){
+    const d=new Date();
+    d.setDate(d.getDate()-i);
+    const key=d.toISOString().slice(0,10);
+    if(dailyScore(key)>=60) streak++;
+    else if(i===0) continue;
+    else break;
+  }
+  return streak;
+}
+
+function bestStreakCalc(){
+  const dates=getLastNDates(60);
+  let best=0,run=0;
+  dates.forEach(d=>{
+    if(dailyScore(d)>=60){run++;best=Math.max(best,run)}
+    else run=0;
+  });
+  return best;
+}
+
+function render(){
+  todayEntry();
+
+  const xp=xpProgress();
+  document.getElementById("topXP").innerText=state.xp;
+  document.getElementById("topLevel").innerText=xp.level;
+
+  const t=tasksToday();
+  const done=t.filter(x=>x.done).length;
+  const taskPct=t.length?Math.round(done/t.length*100):0;
+  const namazDone=namazCountForDate(today);
+  const pagesToday=pagesForDate(today);
+  const score=dailyScore(today);
+
+  document.getElementById("taskBadge").innerText=taskPct+"%";
+  document.getElementById("tasksDone").innerText=done;
+  document.getElementById("tasksTotal").innerText=t.length;
+  document.getElementById("taskAvgText").innerHTML=`Weekly avg <strong>${avg(getLastNDates(7).map(taskPctForDate))}%</strong> · Monthly <strong>${avg(getLastNDates(30).map(taskPctForDate))}%</strong>`;
+
+  document.getElementById("namazBadge").innerText=namazDone+"/5";
+  document.getElementById("namazDone").innerText=namazDone;
+  document.getElementById("namazLabel").innerText=namazDone===5?"All prayers complete":"Track your prayers";
+  document.getElementById("namazStreak").innerText=currentStreak();
+
+  document.getElementById("pagesToday").innerText=pagesToday;
+  document.getElementById("pagesTodayBadge").innerText=pagesToday;
+  document.getElementById("dashBook").innerText=state.reading.bookTitle || "No book set";
+
+  const last7=getLastNDates(7);
+  const scores7=last7.map(dailyScore);
+  document.getElementById("weeklyScore").innerText=avg(scores7);
+  document.getElementById("dailyScore").innerText=score;
+  document.getElementById("momentumDelta").innerText=(scores7[6]-scores7[5]>=0?"+":"")+(scores7[6]-scores7[5]);
+
+  lineChart("taskChart",last7.map(taskPctForDate),"#1d9e75");
+  renderNamazGrid("dashNamazGrid");
+  renderHeatmap();
+
+  const bookPct=state.reading.totalPages?Math.round(state.reading.currentPage/state.reading.totalPages*100):0;
+  document.getElementById("readingBookTitle").innerText=state.reading.bookTitle || "No book set";
+  document.getElementById("bookProgressBadge").innerText=bookPct+"%";
+  document.getElementById("bookProgressFill").style.width=Math.min(bookPct,100)+"%";
+  document.getElementById("bookProgressText").innerText=`${state.reading.currentPage}/${state.reading.totalPages} pages · ${pagesToday} pages today`;
+  barChart("readingChart",last7.map(pagesForDate),"#378add");
+
+  document.getElementById("dashboardChallenges").innerHTML=state.challenges.slice(0,4).map(c=>challengeHTML(c,false)).join("");
+
+  document.getElementById("entryDateBadge").innerText=new Date().toDateString();
+  document.getElementById("entryTaskPct").innerText=taskPct+"%";
+  document.getElementById("todayTaskList").innerHTML=t.length?t.map((task,i)=>`
+    <div class="item">
+      <div class="item-title ${task.done?'done':''}">${task.done?'✓ ':''}${task.title}</div>
+      <div class="item-meta">${task.xp} XP</div>
+      <button class="btn secondary mini-btn" onclick="completeTask(${i})">${task.done?'Undo':'Complete'}</button>
+      <button class="btn danger mini-btn" onclick="deleteTask(${i})">Delete</button>
+    </div>
+  `).join(""):`<div class="tiny">No tasks added yet.</div>`;
+  document.getElementById("entryNamazCount").innerText=namazDone+"/5";
+  renderNamazGrid("entryNamazGrid");
+
+  document.getElementById("bookTitleInput").value=state.reading.bookTitle;
+  document.getElementById("currentPageInput").value=state.reading.currentPage;
+  document.getElementById("totalPagesInput").value=state.reading.totalPages;
+  document.getElementById("entryReadingPct").innerText=bookPct+"%";
+
+  document.getElementById("winInput").value=todayEntry().win || "";
+  document.getElementById("noteInput").value=todayEntry().note || "";
+
+  document.getElementById("challengeCount").innerText=state.challenges.length;
+  document.getElementById("challengeList").innerHTML=state.challenges.map((c,i)=>challengeHTML(c,true,i)).join("");
+  horizontalBars("challengeChart",state.challenges.map(c=>({label:c.title,value:c.progress,color:c.color})));
+
+  document.getElementById("bestStreak").innerText=bestStreakCalc();
+  document.getElementById("avgCompletion").innerText=avg(getLastNDates(30).map(taskPctForDate))+"%";
+  document.getElementById("bestWeek").innerText=Math.max(...scores7,0);
+  lineChart("monthlyTaskChart",getLastNDates(30).map(taskPctForDate),"#1d9e75");
+  renderPrayerBreakdown();
+  lineChart("readingTrendChart",getLastNDates(30).map(d=>Math.min(pagesForDate(d)*3,100)),"#378add");
+  document.getElementById("annualPace").innerText=pagesToday*365;
+
+  document.getElementById("scoreLevel").innerText=xp.level;
+  document.getElementById("scoreXP").innerText=state.xp;
+  document.getElementById("currentXP").innerText=state.xp;
+  document.getElementById("nextLevelXP").innerText=xp.next;
+  document.getElementById("xpNeeded").innerText=xp.needed;
+  document.getElementById("ringPct").innerText=xp.pct+"%";
+  document.getElementById("xpRing").style.setProperty("--pct",xp.pct+"%");
+  horizontalBars("scoreBreakdown",[
+    {label:"Tasks",value:taskPct,color:"green"},
+    {label:"Namaz",value:Math.round(namazDone/5*100),color:"purple"},
+    {label:"Reading",value:Math.min(pagesToday*5,100),color:"blue"}
+  ]);
+  renderAchievements();
+}
+
+function challengeHTML(c,editable,i){
+  return `
+  <div class="item">
+    <div class="item-title">${c.title}</div>
+    <div class="item-meta">${c.category} · Target: ${c.target}</div>
+    <div class="progress"><div class="fill ${c.color}-fill" style="width:${c.progress}%"></div></div>
+    <div class="item-meta" style="margin-top:6px">${c.progress}% complete</div>
+    ${editable?`
+      <input class="input" type="number" value="${c.progress}" onchange="updateChallenge(${i},this.value)">
+      <button class="btn danger mini-btn" onclick="deleteChallenge(${i})">Delete</button>
+    `:""}
+  </div>`;
+}
+
+function renderPrayerBreakdown(){
+  const dates=getLastNDates(30);
+  const items=prayers.map(p=>{
+    const completed=dates.filter(d=>state.entries[d]?.prayers?.[p]).length;
+    return {label:prayerLabels[p],value:Math.round(completed/dates.length*100),color:"green"};
+  });
+  horizontalBars("prayerBreakdown",items);
+}
+
+function renderAchievements(){
+  const totalTasks=state.tasks.filter(t=>t.done).length;
+  const totalPages=Object.values(state.reading.pagesByDate).reduce((a,b)=>a+b,0);
+  const perfectDays=getLastNDates(60).filter(d=>namazCountForDate(d)===5).length;
+  const ach=[
+    ["🔥","7-day streak",currentStreak()>=7],
+    ["📖","100 pages",totalPages>=100],
+    ["🕌","Perfect namaz day",namazCountForDate(today)===5],
+    ["⚡","Level 5",levelFromXP(state.xp)>=5],
+    ["🏆","10 tasks",totalTasks>=10],
+    ["📚","500 pages",totalPages>=500],
+    ["💎","Level 10",levelFromXP(state.xp)>=10],
+    ["🎯","5 challenges",state.challenges.length>=5]
+  ];
+  document.getElementById("achievements").innerHTML=ach.map(a=>`
+    <div class="achievement ${a[2]?'':'locked'}">
+      <div class="icon">${a[0]}</div>
+      <div class="tiny">${a[1]}</div>
+    </div>
+  `).join("");
+}
+
+function avg(arr){
+  if(!arr.length)return 0;
+  return Math.round(arr.reduce((a,b)=>a+b,0)/arr.length);
+}
+
+function resetApp(){
+  if(confirm("Reset all app data?")){
+    localStorage.removeItem("zohairTrackerV3");
+    location.reload();
+  }
+}
+
+save();
 </script>
 </body>
 </html>
